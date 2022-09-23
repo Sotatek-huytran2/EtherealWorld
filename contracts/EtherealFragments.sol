@@ -4,6 +4,17 @@ pragma solidity ^0.8.9;
 import "./EtherealFragmentsStorage.sol";
 
 contract EtherealFragments is EtherealFragmentsStorage {
+
+
+	function updateAddress(address _world, address _specialWorld) external onlyOwner {
+		worldsContract = IEtherealWorlds(_world);
+		specialWorldsContract = IEtherealWorlds(_specialWorld);
+	}
+
+	function mint(uint256 _amount) external {
+		_mint(msg.sender, _amount);
+	}
+
 	function getRewards(uint256 _tokenId, uint256 _time) internal returns(uint256 _reward) {
 		_reward = BASE_RATE * (_time - lastUpdate[_tokenId]) / 86400;
 		lastUpdate[_tokenId] = _time;	

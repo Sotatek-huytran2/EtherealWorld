@@ -50,9 +50,11 @@ contract EtherealWorlds is Ownable, ERC721Enumerable {
      */
     function mint(bytes calldata _signature, uint256 _nonce) external payable {
         require(isSaleActive, "Worlds: Sale Inactive");
-        require(WORLD_PRICE <= msg.value, "Worlds: Insufficient Funds");
-        require(hashMessage(_nonce).recover(_signature) == _signer, "Worlds: Weird Hash");
-        require(!usedNonces[_nonce], "Worlds: Reused Hash");
+
+        // require(WORLD_PRICE <= msg.value, "Worlds: Insufficient Funds");
+        // require(hashMessage(_nonce).recover(_signature) == _signer, "Worlds: Weird Hash");
+        // require(!usedNonces[_nonce], "Worlds: Reused Hash");
+
         uint256 currentSupply = totalSupply();
         require(currentSupply < MAX_WORLDS, "Worlds: Sold Out");
         usedNonces[_nonce] = true;
